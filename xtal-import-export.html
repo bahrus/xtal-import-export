@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="xtal-import-export">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `xtal-import-export`
+     * import/export symbols to a containing web component
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class XtalImportExport extends Polymer.Element {
+      static get is() { return 'xtal-import-export'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'xtal-import-export'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(XtalImportExport.is, XtalImportExport);
+  </script>
+</dom-module>
