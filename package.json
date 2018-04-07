@@ -1,0 +1,9 @@
+{
+  "name": "xtal-import-export",
+  "version": "0.0.0",
+  "description": "Turn ES6 Module Exports into Props ",
+  "main": "xtal-import-export.js",
+  "repository": "https://github.com/bahrus/xtal-import-export",
+  "author": "bahrus <anderson.bruce.b@gmail.com>",
+  "license": "MIT"
+}
