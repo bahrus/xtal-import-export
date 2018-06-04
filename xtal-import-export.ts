@@ -1,4 +1,4 @@
-
+import {XtallatX} from 'xtal-latx/xtal-latx.js';
 /**
 * `xtal-import-export`
 * Set properties of a parent custom element using ES6 module notation
@@ -7,19 +7,11 @@
 * @polymer
 * @demo demo/index.html
 */
-class XtalImportExport extends HTMLElement {
+class XtalImportExport extends XtallatX(HTMLElement) {
     static get is() { return 'xtal-import-export'; }
     _previousEvaluatedText: string;
     evaluateScriptText() {
-        const templateTag = this.querySelector('template') as HTMLTemplateElement;
-        let clone: DocumentFragment;
-        if (templateTag) {
-            clone = document.importNode(templateTag.content, true) as HTMLDocument;
-        } 
         let scriptTag = this.querySelector('script');
-        if (!scriptTag && clone) {
-            scriptTag = clone.querySelector('script');
-        }
         if (!scriptTag) {
             console.error('No script tag  found to apply.');
             return;
@@ -78,13 +70,21 @@ class XtalImportExport extends HTMLElement {
         }
         ]`;
         const fnArr =  eval(protectedScript);
-        const target = this.parentElement;;
+        // const target = this.parentElement;;
         const exportedSymbols = fnArr[0]().then(exportedSymbols =>{
-            Object.assign(target, exportedSymbols);
+            this.exportedSymbols = exportedSymbols;
         }).catch(e =>{
             throw e;
         })
         //Object.assign(this, srcObj);
+    }
+
+    _exportedSymbols; any;
+    get exportedSymbols(){
+        return this._exportedSymbols;
+    }
+    set exportedSymbols(val){
+        this.updateResultProp(val, 'exported-symbols', '_exportedSymbols');
     }
 
     connectedCallback() {
